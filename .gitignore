@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django specific
+*.log
+*.pot
+*.pyc
+*.pyo
+*.swp
+*.sqlite3
+db.sqlite3
+
+# If you are using SQLite3 as your database, ignore the database file
+*.sqlite3
+
+# Ignore the virtual environment
+env/
+venv/
+
+# Ignore media and static files (if applicable)
+media/
+static/
+
+# Ignore environment variables (if using .env file)
+.env
+
+# Ignore migrations
+**/migrations/*

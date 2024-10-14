@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Table Reservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left section: Reservations -->
+        <aside class="reservation-list">
+            <h2>Reservations</h2>
+
+            <h3>Lunch</h3>
+            <div class="reservation">
+                <p><strong>Người A</strong></p>
+                <p>4 Person - B5, B6, B7</p>
+                <p>10:00 PM</p>
+            </div>
+            <div class="reservation">
+                <p><strong>Người B</strong></p>
+                <p>4 Person - B5, B6, B7</p>
+                <p>12:00 PM</p>
+            </div>
+
+            <h3>Dinner</h3>
+            <div class="reservation">
+                <p><strong>Người C</strong></p>
+                <p>2 Person - B5, B6, B7</p>
+                <p>03:00 PM</p>
+            </div>
+            <div class="reservation">
+                <p><strong>Người D</strong></p>
+                <p>3 Person - B5, B6, B7</p>
+                <p>04:00 PM</p>
+            </div>
+            <div class="reservation">
+                <p><strong>Người E</strong></p>
+                <p>2 Person - B5, B6, B7</p>
+                <p>05:00 PM</p>
+            </div>
+            <div class="reservation">
+                <p><strong>Người F</strong></p>
+                <p>4 Person - B5, B6, B7</p>
+                <p>07:00 PM</p>
+            </div>
+        </aside>
+
+        <!-- Right section: Tables -->
+        <main class="table-layout">
+            <!-- Taskbar with tabs for each area -->
+            <div class="tabs">
+                <div class="tab" data-target="main-dining-room">Main Dining Room</div>
+                <div class="tab" data-target="outdoor">Outdoor</div>
+                <div class="tab" data-target="terrace">Terrace</div>
+            </div>
+
+            <!-- Main Dining Room Section -->
+            <div id="main-dining-room" class="table-section">
+                <h2>Main Dining Room</h2>
+                <div class="tables">
+                    <div class="table">05</div>
+                    <div class="table">06</div>
+                    <div class="table">07</div>
+                    <div class="table vip">VIP</div>
+                    <div class="table">08</div>
+                    <div class="table">09</div>
+                    <div class="table">10</div>
+                </div>
+            </div>
+
+            <!-- Outdoor Section -->
+            <div id="outdoor" class="table-section">
+                <h2>Outdoor</h2>
+                <div class="tables">
+                    <div class="table">01</div>
+                    <div class="table">02</div>
+                    <div class="table">03</div>
+                    <div class="table">04</div>
+                    <div class="table vip">VIP</div>
+                    <div class="table">05</div>
+                    <div class="table">06</div>
+                </div>
+            </div>
+
+            <!-- Terrace Section -->
+            <div id="terrace" class="table-section">
+                <h2>Terrace</h2>
+                <div class="tables">
+                    <div class="table">11</div>
+                    <div class="table">12</div>
+                    <div class="table">13</div>
+                    <div class="table">14</div>
+                    <div class="table vip">VIP</div>
+                    <div class="table">15</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

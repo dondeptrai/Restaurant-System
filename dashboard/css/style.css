@@ -1,0 +1,145 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: arial, sans-serif;
+}
+.search-box {
+	margin-left: 20px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.icon{
+padding-left: 475px;
+}
+.dashboard{
+	padding-left: 10px;
+}
+.search{
+	padding-left: 200px;
+	
+
+}
+.header {
+	display: flex;
+	
+	align-items: center;
+	padding: 15px 30px;
+	background: #e4e5ed;
+	color: #090909;
+	margin-left: 5px;
+}
+.u-name {
+	font-size: 20px;
+	padding-left: 17px;
+}
+.u-name b {
+	color: #e80808;
+	text-shadow: 2px 2px 4px rgba(228, 145, 67, 0.5);
+	font-family: 'Itim', cursive;
+	display: flex;
+            align-items: center; /* Canh giữa ảnh và chữ */
+}
+.header .u-name img {
+	width: 60px; 
+	height: 60px; 
+	margin-right: 10px; 
+}
+.header i {
+	font-size: 30px;
+	cursor: pointer;
+	color: #0e0e0e;
+}
+.header i:hover {
+	color: #127b8e;
+}
+.user-p {
+	text-align: center;
+	padding-left: 10px;
+	padding-top: 25px;
+}
+.user-p img {
+	width: 100px;
+	border-radius: 50%;
+}
+.user-p h4 {
+	color: #050505;
+	padding: 5px 0;
+
+}
+.side-bar {
+	width: 250px;
+	background: #f6f2f2;
+	min-height: 100vh;
+	transition: 500ms width;
+}
+.body {
+	display: flex;
+}
+.section-1 {
+	width: 100%;
+	background: url("../img/bg.jpg");
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.section-1 h1 {
+	color: #fff;
+	font-size: 60px;
+}
+.section-1 p {
+	color: #127b8e;
+	font-size: 20px;
+	background: #fff;
+	padding: 7px;
+	border-radius: 5px;
+}
+.side-bar ul {
+	margin-top: 20px;
+	list-style: none;
+}
+.side-bar ul li {
+	font-size: 16px;
+	padding: 15px 0px;
+	padding-left: 20px;
+	transition: 500ms background;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.side-bar ul li:hover {
+	background: #127b8e;
+}
+.side-bar ul li a {
+	text-decoration: none;
+	color: #090909;
+	cursor: pointer;
+	letter-spacing: 1px;
+}
+.side-bar ul li a i {
+	display: inline-block;
+	padding-right: 10px;
+	font-size: 23px;
+}
+#navbtn {
+	display: inline-block;
+	margin-left: 70px;
+	font-size: 20px;
+	transition: 500ms color;
+}
+#checkbox {
+	display: none;
+}
+#checkbox:checked ~ .body .side-bar {
+	width: 60px;
+}
+#checkbox:checked ~ .body .side-bar .user-p{
+	visibility: hidden;
+}
+#checkbox:checked ~ .body .side-bar a span{
+	display: none;
+}

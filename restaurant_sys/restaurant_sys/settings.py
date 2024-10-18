@@ -75,16 +75,19 @@ WSGI_APPLICATION = 'restaurant_sys.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+from decouple import config
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'don',
-        'PASSWORD': '12345678',
-        'HOST': 'restaurant-database.crw0cgq8izzv.us-east-1.rds.amazonaws.com',
-        'PORT': '5432'
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
+
 
 
 # Password validation

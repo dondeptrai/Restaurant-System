@@ -18,10 +18,10 @@ def main(request):
 
 def testing(request):
   tables = RestaurantTable.objects.all()
-  templete = loader.get_template('testing.html')
+  template = loader.get_template('testing.html')
   context = {
     'tables': tables,
   }
-  return HttpResponse(templete.render(context, request))
+  return HttpResponse(template.render(context, request))
 
 

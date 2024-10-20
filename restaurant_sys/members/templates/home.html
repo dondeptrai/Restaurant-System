@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Table Reservation</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'test.css' %}">
 </head>
 <body>
+    <header class="header">
+        <div class="header-left">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <input type="text" placeholder="Search..." class="search-bar">
+            <div class="icon user-icon">
+                <img class ="user" src="static/img/usert.png">
+            </div>
+        </div>
+    </header>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Demo Restaurant</h2>
+        </div>
+        <nav class="menu">
+            <a href="#" class="menu-item">Floor</a>
+            <a href="#" class="menu-item">Gridview</a>
+            <a href="#" class="menu-item">Timeline</a>
+            <a href="#" class="menu-item">Guest</a>
+            <a href="#" class="menu-item">Chat</a>
+            <a href="#" class="menu-item">Report</a>
+            <a href="#" class="menu-item">Support</a>
+            <a href="#" class="menu-item">Settings</a>
+        </nav>
+    </aside>
+    
     <div class="container">
         <!-- Left section: Reservations -->
         <aside class="reservation-list">
@@ -47,6 +76,8 @@
                 <p>07:00 PM</p>
             </div>
         </aside>
+ 
+
 
         <!-- Right section: Tables -->
         <main class="table-layout">
@@ -62,7 +93,9 @@
                 <h2>Main Dining Room</h2>
                 <div class="tables">
                     {% for table in main_dining_tables %}
-                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                        <div class="table 
+                            {% if table.status == 'reserved' %}reserved{% endif %} 
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
                             {{ table.id }}
                         </div>
                     {% empty %}
@@ -77,7 +110,9 @@
                 <h2>Outdoor</h2>
                 <div class="tables">
                    {% for table in out_door  %}
-                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                        <div class="table 
+                            {% if table.status == 'reserved' %}reserved{% endif %} 
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
                             {{ table.id }}
                         </div>
                     {% empty %}
@@ -91,7 +126,9 @@
                 <h2>Terrace</h2>
                 <div class="tables">
                     {% for table in roof_top %}
-                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                        <div class="table 
+                            {% if table.status == 'reserved' %}reserved{% endif %} 
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
                             {{ table.id }}
                         </div>
                     {% empty %}

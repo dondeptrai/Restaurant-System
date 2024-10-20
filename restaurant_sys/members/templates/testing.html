@@ -1,18 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testing Page</title>
+    <link rel="stylesheet" href="{% static 'test.css' %}">
+    <title>Restaurant Dashboard</title>
 </head>
 <body>
-    <h1>Available Restaurant Tables</h1>
-    <ul>
-        {% for table in tables %}
-            <li>Table {{ table.id }} - {{ table.location_seat }} - Status: {{ table.status }}</li>
-        {% empty %}
-            <li>No tables available.</li>
-        {% endfor %}
-    </ul>
+    <!-- Left Sidebar (Dashboard) -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Demo Restaurant</h2>
+        </div>
+        <nav class="menu">
+            <a href="#" class="menu-item">Floor</a>
+            <a href="#" class="menu-item">Gridview</a>
+            <a href="#" class="menu-item">Timeline</a>
+            <a href="#" class="menu-item">Guest</a>
+            <a href="#" class="menu-item">Chat</a>
+            <a href="#" class="menu-item">Report</a>
+            <a href="#" class="menu-item">Support</a>
+            <a href="#" class="menu-item">Settings</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <input type="text" placeholder="Search..." class="search-bar">
+                <div class="icon bell-icon"></div>
+                <div class="icon user-icon"></div>
+            </div>
+        </header>
+
+        <!-- Body Section (Where your tables and reservations go) -->
+        <section class="body-content">
+            <!-- Your existing layout can go here (like the table reservations section) -->
+        </section>
+    </div>
 </body>
 </html>

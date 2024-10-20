@@ -61,27 +61,28 @@
             <div id="main-dining-room" class="table-section">
                 <h2>Main Dining Room</h2>
                 <div class="tables">
-                    <div class="table">05</div>
-                    <div class="table">06</div>
-                    <div class="table">07</div>
-                    <div class="table vip">VIP</div>
-                    <div class="table">08</div>
-                    <div class="table">09</div>
-                    <div class="table">10</div>
+                    {% for table in main_dining_tables %}
+                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                            {{ table.id }}
+                        </div>
+                    {% empty %}
+                        <p>No tables available.</p>
+                    {% endfor %}
                 </div>
             </div>
+            
 
             <!-- Outdoor Section -->
             <div id="outdoor" class="table-section">
                 <h2>Outdoor</h2>
                 <div class="tables">
-                    <div class="table">01</div>
-                    <div class="table">02</div>
-                    <div class="table">03</div>
-                    <div class="table">04</div>
-                    <div class="table vip">VIP</div>
-                    <div class="table">05</div>
-                    <div class="table">06</div>
+                   {% for table in out_door  %}
+                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                            {{ table.id }}
+                        </div>
+                    {% empty %}
+                        <p>No tables available.</p>
+                   {% endfor %}
                 </div>
             </div>
 
@@ -89,12 +90,13 @@
             <div id="terrace" class="table-section">
                 <h2>Terrace</h2>
                 <div class="tables">
-                    <div class="table">11</div>
-                    <div class="table">12</div>
-                    <div class="table">13</div>
-                    <div class="table">14</div>
-                    <div class="table vip">VIP</div>
-                    <div class="table">15</div>
+                    {% for table in roof_top %}
+                        <div class="table {% if table.status == 'reserved' %}reserved{% endif %}">
+                            {{ table.id }}
+                        </div>
+                    {% empty %}
+                        <p>No tables available.</p>
+                    {% endfor %}
                 </div>
             </div>
         </main>

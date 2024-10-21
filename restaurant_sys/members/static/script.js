@@ -19,3 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs[0].classList.add('active');
     sections[0].classList.add('active');
 });
+
+function showTableInfo(table) {
+    document.getElementById("table-info").style.display = "block";
+    
+    var tableId = table.getAttribute("data-id");
+    var tableStatus = table.getAttribute("data-status");
+    var tableSeat = table.getAttribute("data-seat_num");
+    var tableType = table.getAttribute("data-type");
+
+    document.getElementById("table-id").textContent = tableId;
+    document.getElementById("table-status").textContent = tableStatus;
+    document.getElementById("table-seat").textContent = tableSeat;
+    document.getElementById("table-type").textContent = tableType;
+
+    if (tableStatus === "available") {
+        document.getElementById("order-button").style.display = "block";
+    } else {
+        document.getElementById("order-button").style.display = "none";  
+    }
+}

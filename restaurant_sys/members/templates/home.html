@@ -95,7 +95,12 @@
                     {% for table in main_dining_tables %}
                         <div class="table 
                             {% if table.status == 'reserved' %}reserved{% endif %} 
-                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}"
+                            data-id="{{ table.id }}"
+                            data-status="{{ table.status }}"
+                            data-seat_num="{{ table.seat_num }}"
+                            data-type="Main Dining Room"
+                            onclick="showTableInfo(this)">
                             {{ table.id }}
                         </div>
                     {% empty %}
@@ -103,6 +108,8 @@
                     {% endfor %}
                 </div>
             </div>
+
+          
             
 
             <!-- Outdoor Section -->
@@ -112,7 +119,12 @@
                    {% for table in out_door  %}
                         <div class="table 
                             {% if table.status == 'reserved' %}reserved{% endif %} 
-                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}"
+                            data-id="{{ table.id }}"
+                            data-status="{{ table.status }}"
+                            data-seat_num="{{ table.seat_num }}"
+                            data-type="Main Dining Room"
+                            onclick="showTableInfo(this)">
                             {{ table.id }}
                         </div>
                     {% empty %}
@@ -121,6 +133,8 @@
                 </div>
             </div>
 
+       
+
             <!-- Terrace Section -->
             <div id="terrace" class="table-section">
                 <h2>Terrace</h2>
@@ -128,13 +142,28 @@
                     {% for table in roof_top %}
                         <div class="table 
                             {% if table.status == 'reserved' %}reserved{% endif %} 
-                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}">
+                            {% if table.seat_num > 4 and table.status != 'reserved' %}vip{% endif %}"
+                            data-id="{{ table.id }}"
+                            data-status="{{ table.status }}"
+                            data-seat_num="{{ table.seat_num }}"
+                            data-type="Main Dining Room"
+                            onclick="showTableInfo(this)">
                             {{ table.id }}
                         </div>
                     {% empty %}
                         <p>No tables available.</p>
                     {% endfor %}
                 </div>
+            </div>
+
+            <div id="table-info" style="display: none;">
+                <h3>Table Information</h3>
+                <p>Table Id: <span id="table-id"></span></p>
+                <p>Status: <span id="table-status"></span></p>
+                <p>Seat Number: <span id="table-seat"></span></p>
+                <p>Section: <span id="table-type"></span></p>
+
+                <button id="order-button" onclick="orderTable()">Book Table</button>
             </div>
         </main>
     </div>

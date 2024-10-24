@@ -1,10 +1,12 @@
 from django.db import models
 
 
+
 class Customer(models.Model):
     customer_name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
+    password = models.CharField(max_length=128, default='default_password')
 
     def __str__(self):
         return self.customer_name

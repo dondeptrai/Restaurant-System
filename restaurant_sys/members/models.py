@@ -11,8 +11,13 @@ class Customer(models.Model):
 
 class RestaurantTable(models.Model):
     seat_num = models.IntegerField()
-    location_seat = models.CharField(max_length=255, choices=[('main_dining', 'Main Dining Room'), ('outdoor', 'Outdoor'), ('rooftop', 'Rooftop')])
-    status = models.CharField(max_length=50, choices=[('available', 'Available'), ('reserved', 'Reserved')])
+    location_seat = models.CharField(max_length=255,
+                                     choices=[('main_dining', 'Main Dining Room'),
+                                              ('outdoor', 'Outdoor'),
+                                              ('rooftop', 'Rooftop')])
+    status = models.CharField(max_length=50,
+                              choices=[('available', 'Available'),
+                                       ('reserved', 'Reserved')])
 
     def __str__(self):
         return f"Table {self.id} - {self.location_seat}"

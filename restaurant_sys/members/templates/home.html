@@ -17,8 +17,10 @@
         <div class="header-right">
             <input type="text" placeholder="Search..." class="search-bar">
             <div class="icon user-icon">
-                <img class ="user" src="static/img/usert.png">
-            </div>
+                <a href="{% url 'register' %}">
+                    <img class="user" src="{% static 'img/usert.png' %}" alt="User Icon">
+                </a>
+            </div>      
         </div>
     </header>
     <aside class="sidebar">

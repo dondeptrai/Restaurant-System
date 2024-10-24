@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả tìm kiếm</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Kết quả tìm kiếm</h1>
+    {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Đơn đặt</th>
+                    <th>Khách hàng</th>
+                    <th>Số lượng</th>
+                    <th>Trạng thái bàn</th>
+                    <th>Thời gian đặt</th>
+                    <th>Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.customer.customer_name }}</td>
+                        <td>{{ order.numof_customer }}</td>
+                        <td>
+                            {% for order_table in order.ordertable_set.all %}
+                                {{ order_table.table.status }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for order_table in order.ordertable_set.all %}
+                                {{ order_table.begin_time|date:"H:i" }} đến {{ order_table.end_time|date:"H:i" }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{ order.begin_time|date:"d/m/Y H:i" }} đến {{ order.end_time|date:"d/m/Y H:i" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">Không tìm thấy đơn đặt bàn nào.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Vui lòng nhập lại để tìm kiếm.</p>
+    {% endif %}
+
+    <a href="{% url 'main' %}">Quay lại trang chính</a>
+</body>
+</html>

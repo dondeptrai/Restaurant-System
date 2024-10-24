@@ -55,23 +55,28 @@ def login(request):
         customer_name = request.POST.get('customer_name')
         password = request.POST.get('password')
         
-        if customer_name and password:  # Kiểm tra xem có giá trị không
+        if customer_name and password:
             try:
-                # Tìm khách hàng dựa trên tên
-                customer = Customer.objects.get(customer_name=customer_name)
+                # Tìm tất cả khách hàng có cùng customer_name
+                customers = Customer.objects.filter(customer_name=customer_name)
 
-                # Kiểm tra mật khẩu
-                if check_password(password, customer.password):
-                    # Mật khẩu đúng, chuyển hướng về trang chính
-                    messages.success(request, "Đăng nhập thành công!")
-                    return redirect('main')
+                if customers.exists():
+                    customer = customers.first()  # Lấy khách hàng đầu tiên trong danh sách
+
+                    # Kiểm tra mật khẩu
+                    if check_password(password, customer.password):
+                        # Mật khẩu đúng, chuyển hướng về trang chính
+                        messages.success(request, "Đăng nhập thành công!")
+                        return redirect('main')
+                    else:
+                        # Mật khẩu sai
+                        messages.error(request, "Sai mật khẩu. Vui lòng thử lại.")
                 else:
-                    # Mật khẩu sai
-                    messages.error(request, "Sai mật khẩu. Vui lòng thử lại.")
-            except Customer.DoesNotExist:
-                # Khách hàng không tồn tại
-                messages.error(request, "Tên khách hàng không tồn tại. Vui lòng thử lại.")
+                    # Không tìm thấy khách hàng
+                    messages.error(request, "Tên khách hàng không tồn tại. Vui lòng thử lại.")
+            except Exception as e:
+                messages.error(request, f"Có lỗi xảy ra: {str(e)}")
         else:
             messages.error(request, "Vui lòng điền tên khách hàng và mật khẩu.")
 
-    return render(request, 'login.html')  # Hiển thị form đăng nhập
+    return render(request, 'login.html')

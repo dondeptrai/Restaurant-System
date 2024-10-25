@@ -116,16 +116,16 @@ def search_orders(request):
 
 def add_order(request):
     if request.method == 'POST':
-        customer = Customer.objects.get(id=1)  # Chỉ là ví dụ, bạn có thể thay đổi cách lấy customer
+        customer = Customer.objects.get(id=1)  #cái này test nên cứ mặc định là customer id 1 
         numof_customer = request.POST.get('numof_customer')
         begin_time = request.POST.get('begin_time')
         end_time = request.POST.get('end_time')
-        table_id = request.POST.get('table_id')  # Đảm bảo rằng table_id có giá trị
+        table_id = request.POST.get('table_id')  
 
         if not table_id:
             return HttpResponse("Table ID is missing", status=400)
 
-        # Tiếp tục xử lý nếu có giá trị table_id
+        
         table = RestaurantTable.objects.get(id=table_id)
         order = Order.objects.create(
             customer=customer,

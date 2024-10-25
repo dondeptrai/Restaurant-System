@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Customer(models.Model):
@@ -39,3 +40,16 @@ class OrderTable(models.Model):
 
     def __str__(self):
         return f"Order {self.order.id} - Table {self.table.id}"
+    
+    def check_and_update_table_status(self):
+        current_time = timezone.now()
+        
+        if self.table.status == 'reserved' and current_time >= self.end_time:
+            self.table.status = 'available'
+            self.table.save()
+
+            self.delete()
+
+            remaining_order_tables = OrderTable.objects.filter(order=self.order)
+            if not remaining_order_tables.exists():
+                self.order.delete()

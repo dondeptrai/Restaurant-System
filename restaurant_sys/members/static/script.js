@@ -4,18 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Remove active class from all tabs and sections
             tabs.forEach(t => t.classList.remove('active'));
             sections.forEach(s => s.classList.remove('active'));
 
-            // Add active class to the clicked tab and corresponding section
+            
             tab.classList.add('active');
             const target = tab.getAttribute('data-target');
             document.getElementById(target).classList.add('active');
         });
     });
 
-    // Set default active tab
+    
     tabs[0].classList.add('active');
     sections[0].classList.add('active');
 });
@@ -33,9 +32,12 @@ function showTableInfo(table) {
     document.getElementById("table-seat").textContent = tableSeat;
     document.getElementById("table-type").textContent = tableType;
 
+    document.getElementById("table-id-input").value = tableId;  
+
+
     if (tableStatus === "available") {
-        document.getElementById("order-button").style.display = "block";
+        document.getElementById("booking-form").style.display = "block";
     } else {
-        document.getElementById("order-button").style.display = "none";  
+        document.getElementById("booking-form").style.display = "none";
     }
 }

@@ -1,17 +1,22 @@
 from django.http import HttpResponse
 from django.template import loader
-from .models import RestaurantTable,Order
+from .models import RestaurantTable, Order, OrderTable, Customer
 from django.db.models import Q
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 
 def main(request):
-    # Lấy các bảng đặt chỗ theo từng khu vực
+    order_tables = OrderTable.objects.all()
     main_dining_tables = RestaurantTable.objects.filter(location_seat='main_dining')
     out_door = RestaurantTable.objects.filter(location_seat='outdoor')
     roof_top = RestaurantTable.objects.filter(location_seat='rooftop')
 
+    #Xử lý cập nhật thời gian trạng thái bàn
+    for order_table in order_tables:
+        order_table.check_and_update_table_status()
+    
+        
     # Xác định khoảng thời gian cho bữa trưa và bữa tối
     lunch_start_time = timezone.datetime.strptime('6:00 AM', '%I:%M %p').time()
     lunch_end_time = timezone.datetime.strptime('2:00 PM', '%I:%M %p').time()
@@ -108,3 +113,33 @@ def search_orders(request):
         'orders': orders,
     }
     return HttpResponse(template.render(context, request))
+
+def add_order(request):
+    if request.method == 'POST':
+        customer = Customer.objects.get(id=1)  # Chỉ là ví dụ, bạn có thể thay đổi cách lấy customer
+        numof_customer = request.POST.get('numof_customer')
+        begin_time = request.POST.get('begin_time')
+        end_time = request.POST.get('end_time')
+        table_id = request.POST.get('table_id')  # Đảm bảo rằng table_id có giá trị
+
+        if not table_id:
+            return HttpResponse("Table ID is missing", status=400)
+
+        # Tiếp tục xử lý nếu có giá trị table_id
+        table = RestaurantTable.objects.get(id=table_id)
+        order = Order.objects.create(
+            customer=customer,
+            numof_customer=numof_customer,
+            begin_time=begin_time,
+            end_time=end_time,
+        )
+        OrderTable.objects.create(
+            order=order,
+            table=table,
+            begin_time=begin_time,
+            end_time=end_time
+        )
+        table.status = 'reserved'
+        table.save()
+
+        return redirect('main')

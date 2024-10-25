@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
+from .views import add_order
 
 urlpatterns = [
     path('', views.main, name='main'),
     path('testing/', views.testing, name='testing'),
     path('search/', views.search_orders, name='search_orders'),
+    path('add_order/', add_order, name='add_order'),
 
 ]

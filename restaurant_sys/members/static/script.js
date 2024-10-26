@@ -41,3 +41,7 @@ function showTableInfo(table) {
         document.getElementById("booking-form").style.display = "none";
     }
 }
+function toggleUserDropdown() {
+    const dropdown = document.getElementById('user-dropdown');
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+}

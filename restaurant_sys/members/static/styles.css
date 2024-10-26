@@ -190,3 +190,28 @@ body {
 .confirm-booking {
     float: right;
 }
+.user-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-icon span {
+    margin-right: 10px; /* Khoảng cách giữa tên người dùng và nút đăng xuất */
+    color: #333; /* Màu chữ cho tên người dùng */
+    font-size: 16px; /* Kích thước chữ cho tên người dùng */
+}
+
+.logout-link {
+    background-color: #f44336; /* Màu nền cho nút đăng xuất */
+    color: white; /* Màu chữ cho nút đăng xuất */
+    padding: 5px 10px; /* Padding cho nút đăng xuất */
+    border-radius: 4px; /* Bo tròn góc cho nút đăng xuất */
+    text-decoration: none; /* Bỏ gạch chân */
+    font-size: 14px; /* Kích thước chữ cho nút đăng xuất */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi di chuột */
+}
+
+.logout-link:hover {
+    background-color: #d32f2f; /* Màu nền khi di chuột lên nút đăng xuất */
+}

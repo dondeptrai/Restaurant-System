@@ -10,6 +10,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
 from django import forms
+from django.contrib.auth import logout
 
 def main(request):
     order_tables = OrderTable.objects.all()
@@ -121,15 +122,16 @@ def search_orders(request):
 
 def add_order(request):
     if request.method == 'POST':
-        customer = Customer.objects.get(id=1)  #cái này test nên cứ mặc định là customer id 1 
-        numof_customer = request.POST.get('numof_customer')
-        begin_time = request.POST.get('begin_time')
-        end_time = request.POST.get('end_time')
-        table_id = request.POST.get('table_id')  
+        customer_id = request.session.get('customer_id')  
+        if customer_id:
+            customer = Customer.objects.get(id=customer_id)  # Lấy khách hàng dựa trên ID từ phiên
+            numof_customer = request.POST.get('numof_customer')
+            begin_time = request.POST.get('begin_time')
+            end_time = request.POST.get('end_time')
+            table_id = request.POST.get('table_id')
 
         if not table_id:
             return HttpResponse("Table ID is missing", status=400)
-
         
         table = RestaurantTable.objects.get(id=table_id)
         order = Order.objects.create(
@@ -175,7 +177,7 @@ def login(request):
         
         if customer_name and password:
             try:
-                # Tìm tất cả khách hàng có cùng customer_name
+              
                 customers = Customer.objects.filter(customer_name=customer_name)
 
                 if customers.exists():
@@ -183,7 +185,9 @@ def login(request):
 
                     # Kiểm tra mật khẩu
                     if check_password(password, customer.password):
-                        # Mật khẩu đúng, chuyển hướng về trang chính
+                        
+                        request.session['customer_id'] = customer.id
+                        request.session['customer_name'] = customer.customer_name
                         messages.success(request, "Đăng nhập thành công!")
                         return redirect('main')
                     else:
@@ -198,3 +202,9 @@ def login(request):
             messages.error(request, "Vui lòng điền tên khách hàng và mật khẩu.")
 
     return render(request, 'login.html')
+
+def logout_view(request):
+    # Xóa thông tin khách hàng khỏi session
+    logout(request)
+    # Chuyển hướng về trang chính hoặc trang đăng nhập
+    return redirect('main')

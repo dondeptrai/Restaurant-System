@@ -18,10 +18,16 @@
             <input type="text" name="search" placeholder="Tìm kiếm..." onkeydown="if(event.key === 'Enter') this.form.submit();">
         </form>
         <div class="icon user-icon">
-            <a href="{% url 'register' %}">
-                <img class="user" src="{% static 'img/usert.png' %}" alt="User Icon">
-            </a>
+            {% if request.session.customer_name %}
+                <span>Xin chào, {{ request.session.customer_name }}!</span>
+                <a href="{% url 'logout' %}" class="logout-link">Đăng xuất</a>
+            {% else %}
+                <a href="{% url 'login' %}">
+                    <img class="user" src="{% static 'img/usert.png' %}" alt="User Icon">
+                </a>
+            {% endif %}
         </div>
+        
     </header>
     <aside class="sidebar">
         <div class="sidebar-header">

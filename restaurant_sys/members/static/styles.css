@@ -44,20 +44,6 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
-a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-}
-
-a:hover {
-    background-color: #45a049;
-}
-
 * {
     margin: 0;
     padding: 0;

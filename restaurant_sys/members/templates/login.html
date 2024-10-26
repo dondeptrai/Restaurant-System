@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(to right,#1db951, #45e492); 
+            border: none; 
+            color: white; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            transition: background 0.3s ease; 
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(to right, #45a049, #81C784); 
+        }
+
+        .error-message {
+            color: red;
+            margin: 10px 0;
+        }
+
+        .success-message {
+            color: green;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Login</h2>
+
+    <!-- Hiển thị thông báo nếu có -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% endif %}-message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Tên khách hàng" name="customer_name" required>
+        <input type="password" placeholder="Mật khẩu" name="password" required>
+        <input type="submit" value="Đăng nhập">
+    </form>    
+</div>
+
+</body>
+</html>

@@ -5,6 +5,11 @@ from django.db.models import Q
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from .models import Customer
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
+from django.contrib import messages
+from django import forms
 
 def main(request):
     order_tables = OrderTable.objects.all()
@@ -143,3 +148,53 @@ def add_order(request):
         table.save()
 
         return redirect('main')
+class Users(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['customer_name', 'email', 'phone', 'password']
+def register(request):
+    if request.method == 'POST':
+        form = Users(request.POST)
+        if form.is_valid():
+            # Lưu khách hàng mới
+            customer = form.save(commit=False)
+            customer.password = make_password(form.cleaned_data['password'])  # Mã hóa mật khẩu
+            customer.save()
+
+            messages.success(request, "Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.")
+            return redirect('login')
+    else:
+        form = Users()
+
+    return render(request, 'register.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        customer_name = request.POST.get('customer_name')
+        password = request.POST.get('password')
+        
+        if customer_name and password:
+            try:
+                # Tìm tất cả khách hàng có cùng customer_name
+                customers = Customer.objects.filter(customer_name=customer_name)
+
+                if customers.exists():
+                    customer = customers.first()  # Lấy khách hàng đầu tiên trong danh sách
+
+                    # Kiểm tra mật khẩu
+                    if check_password(password, customer.password):
+                        # Mật khẩu đúng, chuyển hướng về trang chính
+                        messages.success(request, "Đăng nhập thành công!")
+                        return redirect('main')
+                    else:
+                        # Mật khẩu sai
+                        messages.error(request, "Sai mật khẩu. Vui lòng thử lại.")
+                else:
+                    # Không tìm thấy khách hàng
+                    messages.error(request, "Tên khách hàng không tồn tại. Vui lòng thử lại.")
+            except Exception as e:
+                messages.error(request, f"Có lỗi xảy ra: {str(e)}")
+        else:
+            messages.error(request, "Vui lòng điền tên khách hàng và mật khẩu.")
+
+    return render(request, 'login.html')

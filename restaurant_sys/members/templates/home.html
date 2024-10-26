@@ -17,9 +17,10 @@
         <form method="GET" action="{% url 'search_orders' %}">
             <input type="text" name="search" placeholder="Tìm kiếm..." onkeydown="if(event.key === 'Enter') this.form.submit();">
         </form>
-            <div class="icon user-icon">
-                <img class ="user" src="static/img/usert.png">
-            </div>
+        <div class="icon user-icon">
+            <a href="{% url 'register' %}">
+                <img class="user" src="{% static 'img/usert.png' %}" alt="User Icon">
+            </a>
         </div>
     </header>
     <aside class="sidebar">

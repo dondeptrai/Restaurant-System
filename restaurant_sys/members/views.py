@@ -188,7 +188,6 @@ def login(request):
                         
                         request.session['customer_id'] = customer.id
                         request.session['customer_name'] = customer.customer_name
-                        messages.success(request, "Đăng nhập thành công!")
                         return redirect('main')
                     else:
                         # Mật khẩu sai

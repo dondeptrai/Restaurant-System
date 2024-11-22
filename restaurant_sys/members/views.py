@@ -66,7 +66,6 @@ def testing(request):
 def search_orders(request):
     search_query = request.GET.get('search', '')
     date_query = request.GET.get('date', '')
-    status_query = request.GET.get('status', '').lower()
     time_query = request.GET.get('time', '')
 
     # Tạo một truy vấn ban đầu
@@ -95,13 +94,6 @@ def search_orders(request):
                 orders = orders.filter(begin_time__date=reservation_date)
             except ValueError:
                 pass
-
-        # Tìm kiếm theo trạng thái bàn
-    if status_query in ['available', 'reserved']:
-        # Lọc theo trạng thái bàn
-        orders = orders.filter(
-            ordertable__table__status=status_query
-        ).distinct()  # Sử dụng distinct để tránh trùng lặp đơn hàng
 
     # Tìm kiếm theo thời gian đặt bàn
     if time_query:
